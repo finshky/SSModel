@@ -45,7 +45,7 @@ Computes the gravitational-wave spectrum in the two-fluid scenario, following Eq
 
 The two-fluid extension introduces two additional parameters:
 
-- **Interaction rate:** $\gamma \equiv \Gamma\_{\mathrm{int}}/H\_*$, where $\Gamma\_{\mathrm{int}}$ is the interaction rate between the fluids and $H\_*$ is the Hubble parameter at the phase transition.
+- **Interaction rate:** $\gamma \equiv \Gamma\_{\mathrm{int}}/H_\ast$, where $\Gamma\_{\mathrm{int}}$ is the interaction rate between the fluids and $H_\ast$ is the Hubble parameter at the phase transition.
 - **Enthalpy ratio:** $r_w \equiv \bar{w}\_v/\bar{w}\_d$, where $\bar{w}\_v$ and $\bar{w}\_d$ are the background enthalpy densities of the visible and dark fluids, respectively.
 
 ## Numerical performance and Python implementation
