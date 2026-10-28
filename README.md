@@ -31,7 +31,8 @@ Computes the fluid profiles around expanding phase-transition bubbles, including
 
 ### `GetKineticSpecrum`
 
-Computes the dimensionless kinetic spectrum, (\zeta\_{\mathrm{kin}}(K)), following Eqs. (33) and (41) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
+Computes the dimensionless kinetic spectrum, $\zeta_{kin}}(K)$, following Eqs. (33) and (41) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
+$$\zeta_K$$
 
 If the requested spectrum is not already available in `data/kinetic.wl`, it is computed and stored for subsequent use.
 
@@ -45,8 +46,8 @@ Computes the gravitational-wave spectrum in the two-fluid scenario, following Eq
 
 The two-fluid extension introduces two additional parameters:
 
-- **Interaction rate:** (\gamma \equiv \Gamma\_{\mathrm{int}}/H\_*), where (\Gamma\_{\mathrm{int}}) is the interaction rate between the fluids and (H\_*) is the Hubble parameter at the phase transition.
-- **Enthalpy ratio:** (r_w \equiv \bar{w}\_v/\bar{w}\_d), where (\bar{w}\_v) and (\bar{w}\_d) are the background enthalpy densities of the visible and dark fluids, respectively.
+- **Interaction rate:** $\gamma \equiv \Gamma\_{\mathrm{int}}/H\_*$, where $\Gamma\_{\mathrm{int}}$ is the interaction rate between the fluids and $H\_*4$ is the Hubble parameter at the phase transition.
+- **Enthalpy ratio:** $r_w \equiv \bar{w}\_v/\bar{w}\_d$, where $\bar{w}\_v$ and $\bar{w}\_d$ are the background enthalpy densities of the visible and dark fluids, respectively.
 
 ## Numerical performance and Python implementation
 
