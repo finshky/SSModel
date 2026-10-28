@@ -31,14 +31,13 @@ Computes the fluid profiles around expanding phase-transition bubbles, including
 
 ### `GetKineticSpecrum`
 
-Computes the dimensionless kinetic spectrum, $\zeta_{kin}}(K)$, following Eqs. (33) and (41) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
-$$\zeta_K$$
+Computes the dimensionless kinetic spectrum, $\zeta_\mathrm{kin}(K)$, following Eqs. (33) and (41) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
 
 If the requested spectrum is not already available in `data/kinetic.wl`, it is computed and stored for subsequent use.
 
 ### `OmegaGW`
 
-Computes the gravitational-wave spectrum, (\Omega\_{\mathrm{GW}}(K)), following Eq. (51) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
+Computes the gravitational-wave spectrum, $\Omega\_{\mathrm{GW}}(K)$, following Eq. (51) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
 
 ### `OmegaGW2f`
 
