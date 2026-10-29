@@ -37,11 +37,22 @@ If the requested spectrum is not already available in `data/kinetic.wl`, it is c
 
 ### `OmegaGW`
 
-Computes the GW spectrum, $\Omega\_{\mathrm{GW}}(K) = $, following Eq. (51) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
+Computes the GW spectrum,
+
+$$
+\Omega_\mathrm{GW}(\delta\tau_\mathrm{fin},k) = 3 \frac{\bar w_d^2}{\bar{\rho}^2}  k^3 {\cal T}_{\rm GW} 
+\int_{-1}^1 \left(1 - z^2 \right)^2 dz 
+    \int_0^\infty  dp
+        \frac{p^2}{\tilde p^4} \, E_\mathrm{kin} (p)
+        E_\mathrm{kin} (\tilde p) 
+        \Delta (\delta\tau_\mathrm{fin}, k, p, \tilde p)
+$$
+
+following Eq. (51) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
 
 ### `OmegaGW2f`
 
-Computes the gravitational-wave spectrum in the two-fluid scenario, following Eq. (45) of *Leaking Sound Waves: GWs From Dark Sectors Weakly Coupled to the SM*.
+Computes the gravitational-wave spectrum in the two-fluid scenario, following Eq. (45) of arXiv xx.yy. This introduces the factor $F^2(\tau)$ in the time integral $\Delta$ (see **Time integrals** below).
 
 The two-fluid extension introduces two additional parameters:
 
@@ -79,7 +90,7 @@ $$
 \Delta_{mn} (\delta\tau_\mathrm{fin}, \hat{p}_{mn}) = 
 \frac{1}{4(1+r_w)^2} 
 \left\lvert
-    \Delta E_i(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + 
+    \Delta Ei(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + 
     r_w \Delta \tilde E_1(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) 
 \right\rvert^2
 $$
@@ -88,7 +99,7 @@ and we defined the exponential integrals
 
 $$
 \begin{align}
-E_i(\tau, \hat{p}_{mn}) &= \int \frac{d\tau}{\tau} e^{i \hat{p}_{mn}\tau} \\
+Ei(\tau, \hat{p}_{mn}) &= \int \frac{d\tau}{\tau} e^{i \hat{p}_{mn}\tau} \\
 \tilde E_1(\tau, \hat{p}_{mn}) &= e^\frac{2\Gamma_\mathrm{int}}{H_\ast}\int \frac{d\tau}{\tau} e^{-(2\Gamma_\mathrm{int}-i\hat{p}_{mn}) \tau} \\
 \Delta f(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) &\equiv f(\tau_\mathrm{fin}) - f(\tau_\ast) \\
 \end{align}
@@ -96,20 +107,21 @@ $$
 
 These are implemented in `SSModel` via the built-in functions `ExpIntegralEi` and `ExpIntegralE`.
 
-Notice that for a transition in a secluded sector, where $\Gamma_\mathrm{int}=0$, the expression above reduces to Eq. 56 of [2308.12943](https://arxiv.org/abs/2308.12943), since $\Delta \tilde E_1\rvert_{\Gamma_\mathrm{int}=0} = \Delta E_i$:
+Notice that for a transition in a secluded sector, where $\Gamma_\mathrm{int}=0$, the expression above reduces to Eq. 56 of [2308.12943](https://arxiv.org/abs/2308.12943), since $\Delta \tilde E_1\rvert_{\Gamma_\mathrm{int}=0} = \Delta Ei$:
 
 $$
 \begin{align}
 \Delta_{mn} (\delta\tau_\mathrm{fin}, \hat{p}_{mn})\rvert_{\Gamma_\mathrm{int}=0} 
 &= \frac{1}{4} 
     \left\lvert
-        \Delta E_i(\delta\tau_\mathrm{fin}, \hat{p}_{mn})  
+        \Delta Ei(\delta\tau_\mathrm{fin}, \hat{p}_{mn})  
     \right\rvert^2 \\
 &= \frac{1}{4} 
-    \left[\Delta Ci^2(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + \Delta Si^2(\delta\tau_\mathrm{fin}, \hat{p}_{mn})\right]\, .
+    \left[\Delta Ci^2(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + \Delta Si^2(\delta\tau_\mathrm{fin}, \hat{p}_{mn})\right] .
 \end{align}
 $$
 
+$Ci$ and $Si$ are the real and imaginary parts of $Ei$.
 
 ## Numerical performance and Python implementation
 
