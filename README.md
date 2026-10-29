@@ -37,7 +37,7 @@ If the requested spectrum is not already available in `data/kinetic.wl`, it is c
 
 ### `OmegaGW`
 
-Computes the gravitational-wave spectrum, $\Omega\_{\mathrm{GW}}(K)$, following Eq. (51) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
+Computes the GW spectrum, $\Omega\_{\mathrm{GW}}(K) = $, following Eq. (51) of [arXiv:2308.12943](https://arxiv.org/abs/2308.12943).
 
 ### `OmegaGW2f`
 
@@ -45,8 +45,71 @@ Computes the gravitational-wave spectrum in the two-fluid scenario, following Eq
 
 The two-fluid extension introduces two additional parameters:
 
-- **Interaction rate:** $\gamma \equiv \Gamma\_{\mathrm{int}}/H_\ast$, where $\Gamma\_{\mathrm{int}}$ is the interaction rate between the fluids and $H_\ast$ is the Hubble parameter at the phase transition.
-- **Enthalpy ratio:** $r_w \equiv \bar{w}\_v/\bar{w}\_d$, where $\bar{w}\_v$ and $\bar{w}\_d$ are the background enthalpy densities of the visible and dark fluids, respectively.
+- **Interaction rate:** $\gamma \equiv \frac{\Gamma_\mathrm{int}}{H_\ast}$, where $\Gamma\_{\mathrm{int}}$ is the interaction rate between the fluids and $H_\ast$ is the Hubble parameter at the phase transition.
+- **Enthalpy ratio:** $r_w \equiv \frac{\bar{w}\_v}{\bar{w}\_d}$, where $\bar{w}\_v$ and $\bar{w}\_d$ are the background enthalpy densities of the visible and dark fluids, respectively.
+
+## Time integrals
+
+The GW spectra depend on the time integrals (Eq. 46 of arXiv xx.yy)
+
+$$
+\Delta (\delta\tau_\mathrm{fin},  k, p, \tilde p) \equiv 
+\int_{\tau_0}^{\tau_\ast} \,\frac{d \tau_1}{\tau_1} 
+\int_{\tau_0}^{\tau_\ast} \, \frac{d \tau_2}{\tau_2}
+\cos (p c_s \tau_-)
+\cos (\tilde p c_s \tau_-)
+\cos (k\tau_-)  F(\tau_1) \, F(\tau_2)\,
+$$
+
+where (Eq. 44)
+
+$$
+F(\tau) = \frac{1}{1 + r_w} \left[ 1 + r_w e^{-2\Gamma_\mathrm{int}(\tau - \tau_\ast)} \right] .
+$$
+
+Defining $\hat{p}_{mn} \equiv k+c_s(m p + n \tilde p)$ and using trigonometric identities (see Sec. IV.A of [2308.12943](https://arxiv.org/abs/2308.12943)), the integral can be written as
+
+$$
+\Delta (\delta\tau_\mathrm{fin},  k, p, \tilde p) = \sum_{m,n=\pm 1} \Delta_{mn}(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) ,
+$$
+
+where
+
+$$
+\Delta_{mn} (\delta\tau_\mathrm{fin}, \hat{p}_{mn}) = 
+\frac{1}{4(1+r_w)^2} 
+\left\lvert
+    \Delta E_i(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + 
+    r_w \Delta \tilde E_1(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) 
+\right\rvert^2
+$$
+
+and we defined the exponential integrals
+
+$$
+\begin{align}
+E_i(\tau, \hat{p}_{mn}) &= \int \frac{d\tau}{\tau} e^{i \hat{p}_{mn}\tau} \\
+\tilde E_1(\tau, \hat{p}_{mn}) &= e^\frac{2\Gamma_\mathrm{int}}{H_\ast}\int \frac{d\tau}{\tau} e^{-(2\Gamma_\mathrm{int}-i\hat{p}_{mn}) \tau} \\
+\Delta f(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) &\equiv f(\tau_\mathrm{fin}) - f(\tau_\ast) \\
+\end{align}
+$$
+
+These are implemented in `SSModel` via the built-in functions `ExpIntegralEi` and `ExpIntegralE`.
+
+Notice that for a transition in a secluded sector, where $\Gamma_\mathrm{int}=0$, the expression above reduces to Eq. 56 of [2308.12943](https://arxiv.org/abs/2308.12943), since $\Delta \tilde E_1\rvert_{\Gamma_\mathrm{int}=0} = \Delta E_i$:
+
+$$
+\begin{align}
+\Delta_{mn} (\delta\tau_\mathrm{fin}, \hat{p}_{mn})\rvert_{\Gamma_\mathrm{int}=0} 
+&= \frac{1}{4} 
+    \left\lvert
+        \Delta E_i(\delta\tau_\mathrm{fin}, \hat{p}_{mn})  
+    \right\rvert^2 \\
+&= \frac{1}{4} 
+    \left[\Delta Ci^2(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + \Delta Si^2(\delta\tau_\mathrm{fin}, \hat{p}_{mn})\right]\, .
+\end{align}
+$$
+
 
 ## Numerical performance and Python implementation
 
