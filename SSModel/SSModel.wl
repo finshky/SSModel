@@ -8,6 +8,7 @@
 (*Implementation of the Sound shell model  (Hindmarsh 2016, Hindmarsh & Hijazi 2019)*)
 (*The Sound shell model, in essence, aims to capture the linear regime of in a cosmological 1^st-order phase transition producing a stochastic gravitational wave background through compressional waves.*)
 (*This notebook follows the formulation from Roper Pol, Procacci & Caprini 2024.*)
+(*For further details, see the accompanying paper arXiv:2610.40781 and the git repository SSModel.*)
 
 
 BeginPackage["SSModel`"]

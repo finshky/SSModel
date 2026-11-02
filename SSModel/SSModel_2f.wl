@@ -4,6 +4,10 @@
 (*2 Fluid Sound Shell Model*)
 
 
+(* ::Text:: *)
+(*Extension of the Sound shell model, implemented in SSModel.wl, to a 2-fluid scenario. For further details, see the accompanying paper arXiv:2610.40781 and the git repository SSModel.*)
+
+
 BeginPackage["SSModel2f`",{"SSModel`"}]
 
 
@@ -21,6 +25,7 @@ OmegaGW2fPrefLowK;
 {\[CapitalDelta]CEi,\[CapitalDelta]SEi,\[CapitalDelta]mn2f,\[CapitalDelta]2f,\[CapitalDelta]02f};
 {F,FArg,\[CapitalUpsilon]2f,\[CapitalUpsilon]2fOver1f};
 ComputeOmegaGW2f;
+PlotPrefactor;
 
 
 OmegaGW2F;
@@ -39,8 +44,30 @@ IntegrandP;
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Plotting*)
+
+
+PlotPrefactor::usage="PlotPrefactor[\[Delta]\[Tau]H] makes a ContourPlot of the prefactor ratio \[CapitalUpsilon]2fOver1f.";
+Options[PlotPrefactor]={"rRange"->{3 10^-1,5 10},"\[Gamma]Range"->{5 10^-1,10^2}};
+PlotPrefactor[\[Delta]\[Tau]H_,opts:OptionsPattern[]]:=Module[{\[Tau]max=1,rmin,rmax,\[Gamma]min,\[Gamma]max,minMax,optsPlot},
+	{rmin,rmax}=OptionValue["rRange"];
+	{\[Gamma]min,\[Gamma]max}=OptionValue["\[Gamma]Range"];
+	minMax=Log10@{\[CapitalUpsilon]2fOver1f[\[Tau]max,{\[Gamma]max,rmax}]//Quiet,1.};
+	optsPlot=FilterOptions[Join[{opts},Options[PlotPrefactor]],ContourPlot];
+	ContourPlot[Log10@\[CapitalUpsilon]2fOver1f[\[Delta]\[Tau]H,{\[Gamma],r}],{r,rmin,rmax},{\[Gamma],\[Gamma]min,\[Gamma]max},
+		optsPlot//Evaluate,
+		FrameLabel->{"\!\(\*SubscriptBox[OverscriptBox[\(w\), \(_\)], \(v\)]\)/\!\(\*SubscriptBox[OverscriptBox[\(w\), \(_\)], \(d\)]\)", "\!\(\*SubscriptBox[\(\[CapitalGamma]\), \(int\)]\)/\!\(\*SubscriptBox[\(H\), \(*\)]\)"},
+		ImageSize->Medium,
+		PlotLegends->BarLegend[{Automatic,minMax},LegendLabel->(*Style[*)"\!\(\*SubscriptBox[\(log\), \(10\)]\)\!\(\*FractionBox[\(\[CurlyCapitalUpsilon]\), SubscriptBox[\(\[CurlyCapitalUpsilon]\), \(\*SubscriptBox[\(\[CapitalGamma]\), \(int\)] \[Rule] 0\)]]\)"(*,FontFamily->"TeX Gyre Bonum Math"]*),LegendMarkerSize->250],
+		ScalingFunctions->{"Log","Log"},
+		ColorFunction->"RedBlueTones",
+		PlotLabel->(*Style[*)StringTemplate["\!\(\*SubscriptBox[\(\[Tau]\), \(sw\)]\)\!\(\*SubscriptBox[\(H\), \(*\)]\) = ``"][ToString[Round[\[Delta]\[Tau]H,.1]/.(1.->1)]](*,FontFamily->"TeX Gyre Bonum Math"]*),
+		PlotRange->minMax,
+		Contours->20,
+		PerformanceGoal->"Quality"
+		]
+	]
 
 
 (* ::Input::Initialization:: *)
