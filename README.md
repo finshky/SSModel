@@ -40,11 +40,9 @@ If the requested spectrum is not already available in `data/kinetic.wl`, it is c
 Computes the GW spectrum,
 
 $$
-\Omega_\mathrm{GW}(\delta\tau_\mathrm{fin},k) = 3 \frac{\bar w_d^2}{\bar{\rho}^2}  k^3 {\cal T}_{\rm GW} 
-\int_{-1}^1 \left(1 - z^2 \right)^2 dz 
-    \int_0^\infty  dp
-        \frac{p^2}{\tilde p^4} \, E_\mathrm{kin} (p)
-        E_\mathrm{kin} (\tilde p) 
+\Omega_\mathrm{GW}(\delta\tau_\mathrm{fin},k) = 3 \ \frac{\bar w_d^2}{\bar{\rho}^2} \ k^3 \ {\cal T}_{\rm GW} 
+\int_{-1}^1 \mathrm{d}z \ \left(1 - z^2 \right)^2
+    \int_0^\infty \mathrm{d}p \ \frac{p^2}{\tilde p^4} \ E_\mathrm{kin} (p) E_\mathrm{kin} (\tilde p) 
         \Delta (\delta\tau_\mathrm{fin}, k, p, \tilde p)
 $$
 
@@ -65,11 +63,10 @@ The GW spectra depend on the time integrals (Eq. 46 of [2610.40781](https://arxi
 
 $$
 \Delta (\delta\tau_\mathrm{fin},  k, p, \tilde p) \equiv 
-\int_{\tau_0}^{\tau_\ast} \,\frac{d \tau_1}{\tau_1} 
-\int_{\tau_0}^{\tau_\ast} \, \frac{d \tau_2}{\tau_2}
-\cos (p c_s \tau_-)
-\cos (\tilde p c_s \tau_-)
-\cos (k\tau_-)  F(\tau_1) \, F(\tau_2)\,
+\int_{\tau_0}^{\tau_\ast} \ \frac{\mathrm{d}\tau_1}{\tau_1} 
+\int_{\tau_0}^{\tau_\ast} \  \frac{\mathrm{d}\tau_2}{\tau_2} 
+\ \cos (p c_s \tau_-) \ \cos(\tilde p c_s \tau_-) \ \cos (k\tau_-)
+\ F(\tau_1) \  F(\tau_2)\ 
 $$
 
 where (Eq. 44)
@@ -88,8 +85,8 @@ where
 
 $$
 \Delta_{mn} (\delta\tau_\mathrm{fin}, \hat{p}_{mn}) = 
-\frac{1}{4(1+r_w)^2} 
-\left\lvert
+\frac{1}{4(1+r_w)^2}
+\ \left\lvert
     \Delta Ei(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) + 
     r_w \Delta \tilde E_1(\delta\tau_\mathrm{fin}, \hat{p}_{mn}) 
 \right\rvert^2
